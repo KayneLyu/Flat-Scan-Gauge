@@ -1,0 +1,46 @@
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'Horizon',
+    component: () => import('@renderer/')
+  },
+  {
+    path: '/Controls',
+    name: 'Controls',
+    component: () => import('@/views/control/index.vue')
+  },
+  {
+    path: '/annular',
+    name: 'Annular',
+    component: () => import('@/views/annular/index.vue')
+  },
+
+  {
+    path: '/vertical',
+    name: 'Vertical',
+    component: () => import('@/views/vertical/index.vue')
+  },
+  {
+    path: '/product',
+    name: 'Product',
+    component: () => import('@/views/product/index.vue')
+  },
+  {
+    path: '/alarm',
+    name: 'Alarm',
+    component: () => import('@/views/alarm/index.vue')
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    component: () => import('@/views/settings/rack/index.vue')
+  }
+]
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
+})
+
+export default router

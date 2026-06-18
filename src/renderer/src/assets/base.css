@@ -31,6 +31,49 @@
   --color-text: var(--ev-c-text-1);
 }
 
+:root {
+  /* 页面基础背景色 */
+  --color-page-bg: #1a2028;
+  --color-card-bg: #242c37;
+  --color-sidebar-bg: #202730;
+  --color-chart-bg: #1e252e;
+
+  /* 分割线、边框灰阶 */
+  --color-border-line: #38424f;
+  --color-hover-block: #2f3844;
+
+  /* 文字色系 */
+  --text-primary: #ffffff;
+  --text-normal: #c8d1dd;
+  --text-aux: #8a97a8;
+
+  /* 工控标准功能状态色 */
+  --color-main-blue: #0086d8; /* 主操作、确认、正常功能 */
+  --color-status-green: #00b46a; /* 合格、运行、通讯正常 */
+  --color-status-yellow: #e6b325; /* 预警、接近阈值、待机 */
+  --color-status-red: #e53935; /* 故障、超差、急停、报警 */
+  --color-disabled-gray: #4a5564; /* 禁用、锁定按钮 */
+
+  /* 厚度曲线专用色 */
+  --curve-real-thick: #00ccff; /* 实时厚度曲线 */
+  --curve-limit-up: #ff4545; /* 厚度上限红线 */
+  --curve-limit-down: #00d060; /* 厚度下限绿线 */
+  --curve-ruler: #94a3b8; /* 横轴标尺刻度 */
+
+  /* 备用西门子深蓝配色（可选切换） */
+  --siemens-page-bg: #0f1a28;
+  --siemens-card-bg: #18273b;
+  --siemens-blue: #007acc;
+  --siemens-red: #f22c2c;
+
+  /* 浅工业亮色备用（暗光车间） */
+  --light-page-bg: #f2f5f9;
+  --light-card-bg: #ffffff;
+  --light-border: #dce3ed;
+  --light-blue: #0078d4;
+  --light-red: #d92d20;
+}
+
 *,
 *::before,
 *::after {
@@ -45,8 +88,8 @@ ul {
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: var(--text-normal);
+  background: var(--color-page-bg);
   line-height: 1.6;
   font-family:
     Inter,

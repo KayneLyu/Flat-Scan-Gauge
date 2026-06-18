@@ -6,6 +6,7 @@ import icon from '../../resources/icon.png?asset'
 let mainWindow: BrowserWindow
 let splashWindow: BrowserWindow
 
+// 加载动画
 function createSplashWindow() {
   splashWindow = new BrowserWindow({
     width: 800,
@@ -34,12 +35,14 @@ function createSplashWindow() {
   }
 }
 
+// 主窗口
 function createMainWindow(): void {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1920,
+    height: 1080,
     show: false,
+    frame: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -47,7 +50,7 @@ function createMainWindow(): void {
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: false
-    }
+    },
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -56,7 +59,7 @@ function createMainWindow(): void {
     //   splashWindow.destroy() // splashWindow.close()
     // }
 
-    // 方案二：如果需要保证最小显示时间（至少显示 2 秒），可以这样：
+    // 显示动画时间
     setTimeout(() => {
       if (splashWindow && !splashWindow.isDestroyed()) {
         splashWindow.destroy()
@@ -84,6 +87,19 @@ function createMainWindow(): void {
       splashWindow.destroy()
     }
     dialog.showErrorBox('启动失败', `应用加载失败: ${errorDescription}`)
+  })
+}
+
+// 防止重复点击软件
+const getLock = app.requestSingleInstanceLock()
+if (!getLock) {
+  app.quit()
+} else {
+  app.on('second-instance', () => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore()
+      mainWindow.focus()
+    }
   })
 }
 
