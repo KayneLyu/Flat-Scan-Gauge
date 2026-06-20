@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { useNow, useDateFormat } from "@vueuse/core";
+import LangComponent from './lang.vue';
+
+
+
+const now = useNow();
+const dateNow = useDateFormat(now, "YYYY-MM-DD HH:mm");
+
 const title = '平扫测厚仪自动风环控制系统客户端 v1.2.5'
 </script>
 
@@ -11,7 +19,12 @@ const title = '平扫测厚仪自动风环控制系统客户端 v1.2.5'
 
     </div>
     <div class="info">
-
+      <div class="func">
+        <LangComponent />
+      </div>
+      <div class="date">
+        {{ dateNow }}
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +37,6 @@ const title = '平扫测厚仪自动风环控制系统客户端 v1.2.5'
   align-items: center;
   height: 50px;
   width: 100%;
-  -webkit-app-region: drag; /* 可拖拽窗口 */
   background-color: var(--color-sidebar-bg);
   border-bottom: 2px solid var(--color-border-line);
 }
@@ -33,5 +45,15 @@ const title = '平扫测厚仪自动风环控制系统客户端 v1.2.5'
   font-weight: 700;
   color: #fff;
   letter-spacing: 2px;
+}
+.status {
+  flex: 1;
+  height: 100%;
+  -webkit-app-region: drag; /* 可拖拽窗口 */
+}
+
+.info {
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -14,9 +14,9 @@ interface Props {
       <Header />
     </div>
     <div class="content">
-      <!-- <router-view /> -->
+      <router-view />
     </div>
-    <div>
+    <div class="footer">
       <Footer />
     </div>
   </div>
@@ -32,4 +32,5 @@ interface Props {
 .content {
   flex:1
 }
+
 </style>

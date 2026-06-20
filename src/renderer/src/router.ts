@@ -3,38 +3,38 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Horizon',
-    component: () => import('@renderer/')
+    component: () => import('@renderer/views/Horizon/index.vue')
   },
   {
-    path: '/Controls',
+    path: '/control',
     name: 'Controls',
-    component: () => import('@/views/control/index.vue')
+    component: () => import('@renderer/views/Controls/index.vue')
   },
   {
     path: '/annular',
     name: 'Annular',
-    component: () => import('@/views/annular/index.vue')
+    component: () => import('@renderer/views/Loop/index.vue')
   },
 
   {
     path: '/vertical',
     name: 'Vertical',
-    component: () => import('@/views/vertical/index.vue')
+    component: () => import('@renderer/views/vertical/index.vue')
   },
   {
     path: '/product',
     name: 'Product',
-    component: () => import('@/views/product/index.vue')
+    component: () => import('@renderer/views/product/index.vue')
   },
   {
     path: '/alarm',
     name: 'Alarm',
-    component: () => import('@/views/alarm/index.vue')
+    component: () => import('@renderer/views/Alarm/index.vue')
   },
   {
     path: '/setting',
     name: 'setting',
-    component: () => import('@/views/settings/rack/index.vue')
+    component: () => import('@renderer/views/Setting/index.vue')
   }
 ]
 

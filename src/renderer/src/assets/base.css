@@ -74,6 +74,11 @@
   --light-red: #d92d20;
 }
 
+html.dark {
+  /* 自定义深色背景颜色 */
+  --el-bg-color: #626aef;
+}
+
 *,
 *::before,
 *::after {

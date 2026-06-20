@@ -3,10 +3,10 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, computed } from 'vue'
 
 // 导入所有svg图标组件
-import HorizonIcon from "@renderer/assets/svg/horizon.vue";
+import HorizonIcon from "@renderer/assets/svg/Horizon.vue";
 import LoopIcon from "@renderer/assets/svg/Loop.vue";
 import SettingIcon from "@renderer/assets/svg/settings.vue";
-import AlarmIcon from "@renderer/assets/svg/alarm.vue";
+import AlarmIcon from "@renderer/assets/svg/Alarm.vue";
 import AutoIcon from "@renderer/assets/svg/Auto.vue";
 import ProductIcon from "@renderer/assets/svg/Product.vue";
 import DataIcon from "@renderer/assets/svg/Data.vue";
@@ -18,12 +18,12 @@ interface MenuItem {
   label: string // 标识（可选）
 }
 const iconList: MenuItem[] = [
-  { path: '/horizon', iconComp: HorizonIcon, label: '首页' },
-  { path: '/auto', iconComp: AutoIcon, label: '自动' },
-  { path: '/loop', iconComp: LoopIcon, label: '循环' },
-  { path: '/alarm', iconComp: AlarmIcon, label: '告警' },
-  { path: '/data', iconComp: DataIcon, label: '数据' },
+  { path: '/', iconComp: HorizonIcon, label: '首页' },
+  { path: '/control', iconComp: AutoIcon, label: '自动' },
+  { path: '/annular', iconComp: LoopIcon, label: '循环' },
+  { path: '/vertical', iconComp: DataIcon, label: '数据' },
   { path: '/product', iconComp: ProductIcon, label: '产品' },
+  { path: '/alarm', iconComp: AlarmIcon, label: '告警' },
   { path: '/setting', iconComp: SettingIcon, label: '设置' },
 ]
 
@@ -31,9 +31,9 @@ const route = useRoute()
 const router = useRouter()
 
 // 当前激活菜单索引
-// const activeIndex = computed(() => {
-//   return iconList.findIndex(item => item.path === route.path)
-// })
+const activeIndex = computed(() => {
+  return iconList.findIndex(item => item.path === route.path)
+})
 
 // 点击图标跳转路由
 const handleClick = (path: string) => {
@@ -60,7 +60,7 @@ const handleClick = (path: string) => {
     >
       <component
         :is="item.iconComp"
-        :class="{ active: index === activeIndex }"
+        :class="{ active: index == activeIndex }"
       />
     </div>
   </div>
@@ -69,7 +69,7 @@ const handleClick = (path: string) => {
 <style scoped>
 .menu {
   position: relative;
-  height: 100px;
+  height: 80px;
   display: flex;
   align-items: center;
   gap: 60px;
@@ -79,9 +79,9 @@ const handleClick = (path: string) => {
 /* 顶部滑动高亮横线 */
 .active-bar {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 70px;
+  top: -5px;
+  left: -5px;
+  width: 80px;
   height: 4px;
   background: #409eff;
   border-radius: 2px;
@@ -101,11 +101,10 @@ const handleClick = (path: string) => {
   width: 70px;
   height: 70px;
   filter: grayscale(100%);
-  transition: filter 0.2s ease;
 }
 
 /* 当前激活图标取消置灰 */
-.menu-item .active :deep(svg) {
+.menu-item .active  {
   filter: grayscale(0%);
 }
 </style>
