@@ -33,6 +33,8 @@ img {
   object-fit: contain;
 }
 .logo, .close {
+  display: flex;
+  align-items: center;
   width: 150px;
   height: 80px;
 }

@@ -72,15 +72,15 @@ const handleClick = (path: string) => {
   height: 80px;
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 30px;
   cursor: pointer;
 }
 
 /* 顶部滑动高亮横线 */
 .active-bar {
   position: absolute;
-  top: -5px;
-  left: -5px;
+  top: -3px;
+  left: 9px;
   width: 80px;
   height: 4px;
   background: #409eff;
@@ -90,7 +90,7 @@ const handleClick = (path: string) => {
 }
 
 .menu-item {
-  width: 70px;
+  width: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
