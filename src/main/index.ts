@@ -1,10 +1,11 @@
-import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+import { app, shell, BrowserWindow, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { registerIpcHandlers } from './ipc'
 
-let mainWindow: BrowserWindow
-let splashWindow: BrowserWindow
+let mainWindow: BrowserWindow | undefined
+let splashWindow: BrowserWindow | undefined
 
 // 加载动画
 function createSplashWindow() {
@@ -38,7 +39,7 @@ function createSplashWindow() {
 // 主窗口
 function createMainWindow(): void {
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  const window = new BrowserWindow({
     width: 1920,
     height: 1080,
     show: false,
@@ -52,8 +53,9 @@ function createMainWindow(): void {
       sandbox: false
     },
   })
+  mainWindow = window
 
-  mainWindow.on('ready-to-show', () => {
+  window.on('ready-to-show', () => {
     // 立即关闭闪窗
     // if (splashWindow && !splashWindow.isDestroyed()) {
     //   splashWindow.destroy() // splashWindow.close()
@@ -64,11 +66,11 @@ function createMainWindow(): void {
       if (splashWindow && !splashWindow.isDestroyed()) {
         splashWindow.destroy()
       }
-      mainWindow.show()
+      window.show()
     }, 3000)
   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  window.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
@@ -76,13 +78,13 @@ function createMainWindow(): void {
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    window.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    window.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
   // 如果主窗口加载失败，也关闭闪窗（防止卡死）
-  mainWindow.webContents.on('did-fail-load', (_event, errorCode, errorDescription) => {
+  window.webContents.on('did-fail-load', (_event, _errorCode, errorDescription) => {
     if (splashWindow && !splashWindow.isDestroyed()) {
       splashWindow.destroy()
     }
@@ -117,8 +119,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  registerIpcHandlers(() => mainWindow)
   createSplashWindow()
   createMainWindow()
 

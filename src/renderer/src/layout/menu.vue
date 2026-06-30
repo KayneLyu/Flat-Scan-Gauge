@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 
 // 导入所有svg图标组件
 import HorizonIcon from "@renderer/assets/svg/Horizon.vue";

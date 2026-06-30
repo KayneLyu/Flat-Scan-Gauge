@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import Header from './header.vue';
 import Footer from "./footer.vue";
-// Props & Emits
-interface Props {
-  title?: string
-}
 
 </script>
 
